@@ -35,7 +35,7 @@ const LandingPage = () => {
       exit="exit"
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white max-w-full">
         {/* Hero Section */}
         <div className="relative text-white">
           <div className="flex items-center justify-center py-2">
@@ -46,8 +46,8 @@ const LandingPage = () => {
             />
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="text-4xl sm:text-8xl text-black font-serif italic select-none">
+          <div className="absolute inset-0 flex items-center justify-between pointer-events-none px-4 sm:px-8">
+            <div className="text-4xl sm:text-8xl text-black font-serif italic select-none text-left">
               EXCLEL
             </div>
             <div className="text-4xl sm:text-8xl font-serif italic opacity-20 select-none">

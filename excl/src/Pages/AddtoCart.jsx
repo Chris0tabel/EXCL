@@ -4,12 +4,13 @@ import { FaArrowLeft } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { motion } from "framer-motion";
 
+
 const AddtoCart = () => {
   const [loading] = useState(false);
     const [cartItems, setCartItems] = useState([
     { id: 1, name: 'Lipstick', color: 'Ruby Red', size: 'Standard', price: 600, quantity: 2, image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=200&h=200&fit=crop' },
     { id: 2, name: 'Eye Shadow Palette', color: 'Natural Tones', size: 'Large', price: 850, quantity: 1, image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=200&h=200&fit=crop' },
-    { id: 3, name: 'Foundation', color: 'Medium Beige', size: '30ml', price: 1200, quantity: 1, image: 'https://images.unsplash.com/photo-1522335789203-aaac1d86b01c?w=200&h=200&fit=crop' },
+    { id: 3, name: 'Foundation', color: 'Medium Beige', size: '30ml', price: 1200, quantity: 1, image: 'https://cdn.dummyjson.com/product-images/beauty/powder-canister/thumbnail.webp' },
   ]);
 
   const updateQuantity = (id, change) => {
@@ -52,12 +53,12 @@ if(loading){
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
      <div>
-     <div className="max-w-7xl  bg-gray-50 mx-auto px-6 py-8">
+     <div className="max-w-full  bg-gray-50 mx-auto px-6 py-8">
         <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 overflow-auto">
           {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 overflow-y-auto max-h-[calc(100vh-150px)]">
             {cartItems.length === 0 ? (
               <div className="bg-white rounded-2xl p-12 text-center">
                 <p className="text-gray-500 text-lg">Your cart is empty</p>
@@ -123,7 +124,7 @@ if(loading){
           </div>
 
           {/* Order Summary */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1  overflow-y-auto max-h-[calc(100vh-150px)]">
             <div className="bg-white rounded-2xl p-6 shadow-sm sticky top-6">
               <h2 className="text-xl font-bold mb-6">Order Summary</h2>
 
@@ -164,7 +165,7 @@ if(loading){
               </div>
 
               {/* Checkout Button */}
-              <button className="w-full py-3 bg-red-600 text-white rounded-full font-bold text-lg hover:bg-red-700 transition-colors mb-3">
+              <button className="w-full py-3 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-red-700 transition-colors mb-3">
                 Proceed to Checkout
               </button>
               <NavLink to="/shop">

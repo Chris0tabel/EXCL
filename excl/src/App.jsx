@@ -6,6 +6,7 @@ import CategoryPage from "./Pages/CategoryPage";
 import Layout from "./Pages/layout/layout";
 import AddtoCart from "./Pages/AddtoCart";
 import { AnimatePresence } from "framer-motion";
+import ProductDetails from "./Pages/modals/ProductDetails";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<LandingPage />} />
           <Route path="/shop" element={<CategoryPage />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<AddtoCart />} />
         </Route>
       </Routes>
