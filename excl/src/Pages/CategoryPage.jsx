@@ -85,12 +85,12 @@ const CategoryPage = () => {
     show: { opacity: 1, y: 0 },
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center loader">
-      </div>
-    );
-  }
+ if (loading){ 
+  return ( 
+  <div className="loader-container"> 
+  <div className="loader scroll-float"></div> 
+  </div>
+   ); }
 
   return (
     <>
@@ -257,71 +257,90 @@ const CategoryPage = () => {
           </div>
 
           {/* products card */}
-          <motion.div
-            className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4"
-            variants={gridAnimation}
-            initial="hidden"
-            animate="show"
-          >
-            {filteredProducts.map((product) => (
-              <motion.div
-                key={product.id}
-                variants={cardAnimation}
-                whileHover={{ y: -4 }}
-                className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden"
-              >
-                <img
-                  src={product?.thumbnail}
-                  alt={product?.title}
-                  className="w-full h-48 object-cover"
-                />
+         <motion.div
+  className="lg:col-span-3"
+  variants={gridAnimation}
+  initial="hidden"
+  animate="show"
+>
+  {filteredProducts.length === 0 ? (
+    <div className="flex flex-col items-center justify-center py-20 text-center">
+      <p className="text-gray-500 text-lg font-medium">
+         No products found under this category
+      </p>
 
-                <div className="p-4 space-y-2">
-                  <h3 className="text-sm font-semibold line-clamp-1">
-                    {product?.title}
-                  </h3>
+      {selectedCategory && (
+        <button
+          onClick={() => setSelectedCategory("")}
+          className="mt-4 px-4 py-2 text-sm border rounded-full hover:bg-black hover:text-white transition"
+        >
+          View all products
+        </button>
+      )}
+    </div>
+  ) : (
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+      {filteredProducts.map((product) => (
+        <motion.div
+          key={product.id}
+          variants={cardAnimation}
+          whileHover={{ y: -4 }}
+          className="bg-white rounded-lg shadow-sm hover:shadow-lg transition-shadow overflow-hidden"
+        >
+          <img
+            src={product?.thumbnail}
+            alt={product?.title}
+            className="w-full h-48 object-cover"
+          />
 
-                  <p className="text-xs text-gray-500 line-clamp-2">
-                    {product?.description}
-                  </p>
+          <div className="p-4 space-y-2">
+            <h3 className="text-sm font-semibold line-clamp-1">
+              {product?.title}
+            </h3>
 
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {product.tags?.length > 0 && (
-                      <div className="flex flex-wrap gap-2">
-                        {product.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 text-[10px] border rounded bg-black text-white "
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+            <p className="text-xs text-gray-500 line-clamp-2">
+              {product?.description}
+            </p>
 
-                  <p className="font-semibold text-sm mt-2">
-                    ${product?.price}
-                  </p>
-
-                  <div className="flex items-center justify-between gap-2 mt-3">
-                    <button
-                      onClick={() => navigate(`/product/${product.id}`)}
-                      className=" flex  border px-3 py-1.5 text-xs rounded hover:bg-black hover:text-white transition"
+            <div className="flex flex-wrap gap-2 mt-2">
+              {product.tags?.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {product.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 text-[10px] border rounded bg-black text-white "
                     >
-                      Details <FaArrowRight className="pt-1" />
-                    </button>
-
-                    <button
-                      onClick={() => navigate(`/cart`)}
-                      className="  bg-black text-white px-1 py-1.5 text-xs rounded-full hover:opacity-90 transition"
-                    >
-                      <CiShoppingCart className="center" />
-                    </button>
-                  </div>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </motion.div>
-            ))}
+              )}
+            </div>
+
+            <p className="font-semibold text-sm mt-2">
+              ${product?.price}
+            </p>
+
+            <div className="flex items-center justify-between gap-2 mt-3">
+              <button
+                onClick={() => navigate(`/product/${product.id}`)}
+                className=" flex  border px-3 py-1.5 text-xs rounded hover:bg-black hover:text-white transition"
+              >
+                Details <FaArrowRight className="pt-1" />
+              </button>
+
+              <button
+                onClick={() => navigate(`/cart`)}
+                className="  bg-black text-white px-1 py-1.5 text-xs rounded-full hover:opacity-90 transition"
+              >
+                <CiShoppingCart className="center" />
+              </button>
+            </div>
+          </div>
+       </motion.div>
+                ))}
+              </div>
+            )}
           </motion.div>
         </div>
       </motion.div>
